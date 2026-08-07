@@ -2,9 +2,14 @@
 
 # ⚡ Z Apps
 
-**Independent software development studio focused on building high-performance, resource-light native utilities for Android.**
+### Lightweight software. Local-first. Privacy-focused.
 
-🌐 **Live Website:** [z-apps.pages.dev](https://z-apps.pages.dev)
+Independent software development studio building
+**high-performance, resource-light native utilities for Android.**
+
+<br>
+
+🌐 **[z-apps.pages.dev](https://z-apps.pages.dev)**
 
 </div>
 
@@ -14,64 +19,71 @@
 
 <table>
 <tr>
-<td width="220" align="center">
+<td width="180" align="center">
 
-<img src="assets/ZPlayer.png" alt="Z Player" width="180">
+<img src="assets/ZPlayer.png" width="150" alt="Z Player">
 
 </td>
 <td>
 
-# Z Player &nbsp; <sup>🟢 Released</sup>
+### Z Player
+**🟢 Released**
 
-A smooth, lightweight local media player designed for a fast and distraction-free experience.
+A smooth, lightweight local media player built for a
+fast and distraction-free experience.
 
-**🎵 Local Playback** · **⚡ Low Overhead** · **🛡️ Privacy First** · **✈️ Offline Ready**
+**🎵 Local Playback**  
+**⚡ Low Overhead**  
+**🛡️ Privacy First**  
+**✈️ Offline Ready**
+
+[View Repository →](https://github.com/silenTKnight-sudo506/ZPlayer)
+
+</td>
+</tr>
+</table>
 
 <br>
 
-**[View Repository →](https://github.com/silenTKnight-sudo506/ZPlayer)**
+<table>
+<tr>
+<td width="180" align="center">
+
+# 🛠️
+
+</td>
+<td>
+
+### Project 02
+**🟡 In Development**
+
+A next-generation Android utility focused on
+**daily productivity, local functionality, and privacy.**
+
+_Coming soon._
 
 </td>
 </tr>
 </table>
 
----
+<br>
 
 <table>
 <tr>
-<td width="220" align="center">
+<td width="180" align="center">
 
-### 🛠️
+# 📁
 
 </td>
 <td>
 
-# Project 02 &nbsp; <sup>🟡 In Development</sup>
+### Project 03
+**🔵 Concept**
 
-A next-generation utility focused on **daily productivity and local privacy**.
+An advanced **local-first file management system**
+designed around speed, simplicity, and user control.
 
-**More details coming soon.**
-
-</td>
-</tr>
-</table>
-
----
-
-<table>
-<tr>
-<td width="220" align="center">
-
-### 📁
-
-</td>
-<td>
-
-# Project 03 &nbsp; <sup>🔵 Concept</sup>
-
-An advanced **local-first file management system** built around speed, simplicity, and user control.
-
-**More details coming soon.**
+_Coming soon._
 
 </td>
 </tr>
@@ -81,39 +93,15 @@ An advanced **local-first file management system** built around speed, simplicit
 
 ## 💡 Philosophy
 
-<table>
-<tr>
-<td width="33%" align="center">
-
-### 🌱 Zero Bloat
-
-No unnecessary background services, telemetry, or resource-heavy features.
-
-</td>
-
-<td width="33%" align="center">
-
-### 🎨 Card-Driven UI
-
-Visual, clean, and modern interfaces designed for quick interaction.
-
-</td>
-
-<td width="33%" align="center">
-
-### 🔒 Local First
-
-Prioritizing offline functionality and local storage security over unnecessary cloud dependency.
-
-</td>
-</tr>
-</table>
+| ⚡ Zero Bloat | 🎨 Clear UI | 🔒 Local First |
+|:---:|:---:|:---:|
+| No unnecessary background services, telemetry, or resource-heavy features. | Clean interfaces designed for quick and intuitive interaction. | Prefer offline functionality and local storage over unnecessary cloud dependency. |
 
 ---
 
 ## 🎯 What's Next?
 
-Z Apps is being built around a simple idea:
+Z Apps is being built around one simple idea:
 
 > **Software should respect your device, your resources, and your privacy.**
 
@@ -121,133 +109,24 @@ More lightweight Android utilities are currently being explored and developed.
 
 ---
 
-<table>
-<tr>
-<td width="50%">
-
 ## 👤 Author
 
 **silenTKnight**
 
-Independent developer building lightweight software and exploring **Android, Linux, and privacy-focused computing.**
+Independent developer building lightweight software and exploring:
 
-</td>
+`Android` · `Linux` · `Privacy-focused computing`
 
-<td width="50%">
+---
 
 ## 📄 License
 
 Open source under the **[MIT License](LICENSE)**.
-
-</td>
-</tr>
-</table>
 
 ---
 
 <div align="center">
 
-**⚡ Lightweight · 🔒 Private · 📱 Local-first**
+⚡ **Lightweight** &nbsp; · &nbsp; 🔒 **Private** &nbsp; · &nbsp; 📱 **Local-first**
 
 </div>
-A next-generation Android utility focused on **daily productivity, local functionality, and privacy.**
-
-> 🚧 More details coming soon.
-
----
-
-### 📁 Project 03
-
-**Concept**
-
-An advanced **local-first file management system** designed around simplicity, speed, and user control.
-
-> 💡 Currently in the concept stage.
-
----
-
-## 💡 Philosophy
-
-Z Apps follows three simple principles:
-
-**⚡ Zero Bloat**  
-No unnecessary background services, telemetry, or resource-heavy features.
-
-**🎨 Clear UI**  
-Clean, modern interfaces designed to make common tasks quick and intuitive.
-
-**🔒 Local First**  
-Prefer offline functionality and local storage instead of unnecessary cloud dependency.
-
----
-
-## 🧭 What's Next?
-
-Z Apps is being built around a simple idea:
-
-> **Software should respect your device, your resources, and your privacy.**
-
-More lightweight Android utilities are currently being explored and developed.
-
----
-
-## 👤 Author
-
-**silenTKnight**
-
-Independent developer building lightweight software and exploring Android, Linux, and privacy-focused computing.
-
----
-
-## 📄 License
-
-Open source under the **[MIT License](LICENSE)**.
-> 🚧 More details coming soon.
-
----
-
-### 📁 Project 03
-**Concept**
-
-An advanced **local-first file management system** designed around simplicity, speed, and user control.
-
-> 💡 Currently in the concept stage.
-
----
-
-## 💡 Philosophy
-
-Z Apps follows three simple principles:
-
-**⚡ Zero Bloat**  
-No unnecessary background services, telemetry, or resource-heavy features.
-
-**🎨 Clear UI**  
-Clean, modern interfaces designed to make common tasks quick and intuitive.
-
-**🔒 Local First**  
-Prefer offline functionality and local storage instead of unnecessary cloud dependency.
-
----
-
-## 🧭 What's Next?
-
-Z Apps is being built around a simple idea:
-
-> **Software should respect your device, your resources, and your privacy.**
-
-More lightweight Android utilities are currently being explored and developed.
-
----
-
-## 👤 Author
-
-**silenTKnight**
-
-Independent developer building lightweight software and exploring Android, Linux, and privacy-focused computing.
-
----
-
-## 📄 License
-
-Open source under the **[MIT License](LICENSE)**.
