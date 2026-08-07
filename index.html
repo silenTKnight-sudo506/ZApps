@@ -681,6 +681,221 @@
       }
     }
 
+
+/* =========================================
+   FINAL POLISH PASS
+   ========================================= */
+
+/* Consistent motion without making the site feel animated */
+@media (prefers-reduced-motion: no-preference) {
+  .app-card,
+  .github-button,
+  .app-link span,
+  .nav-links a {
+    transition:
+      transform 220ms ease,
+      color 220ms ease,
+      border-color 220ms ease,
+      box-shadow 220ms ease,
+      background-color 220ms ease;
+  }
+}
+
+/* Featured Z Player: clearer hierarchy without changing card dimensions */
+.card-zplayer {
+  position: relative;
+}
+
+.card-zplayer::before {
+  content: "FEATURED";
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  padding: 5px 8px;
+  border: 1px solid rgba(35, 197, 94, 0.24);
+  border-radius: 6px;
+  color: rgba(35, 197, 94, 0.72);
+  background: rgba(35, 197, 94, 0.045);
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  pointer-events: none;
+}
+
+/* Keep badge and featured marker from visually competing */
+.card-zplayer .app-badge {
+  padding-right: 96px;
+}
+
+/* Cleaner, more coherent placeholder icons */
+.card-upcoming-1 .app-icon,
+.card-upcoming-2 .app-icon {
+  font-family: Inter, sans-serif;
+  font-size: 1.55rem;
+  font-weight: 500;
+  color: currentColor;
+}
+
+.card-upcoming-1 .app-icon {
+  color: rgba(249, 115, 22, 0.9);
+}
+
+.card-upcoming-2 .app-icon {
+  color: rgba(59, 130, 246, 0.9);
+}
+
+/* Slightly more tactile card hover */
+@media (hover: hover) and (pointer: fine) {
+  .app-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .card-zplayer:hover {
+    box-shadow:
+      0 18px 42px rgba(0, 0, 0, 0.30),
+      0 0 30px rgba(35, 197, 94, 0.095),
+      7px 7px 0 rgba(0, 0, 0, 0.52);
+  }
+}
+
+/* Better CTA integration */
+.github-cta {
+  position: relative;
+  overflow: hidden;
+}
+
+.github-cta::after {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  right: -90px;
+  top: -120px;
+  border-radius: 50%;
+  border: 1px solid rgba(35, 197, 94, 0.10);
+  box-shadow:
+    0 0 0 18px rgba(35, 197, 94, 0.018),
+    0 0 0 40px rgba(35, 197, 94, 0.010);
+  pointer-events: none;
+}
+
+.github-cta > * {
+  position: relative;
+  z-index: 1;
+}
+
+.github-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(35, 197, 94, 0.18);
+}
+
+/* Footer year */
+footer .footer-year {
+  color: #8B949E;
+}
+
+/* Large desktop: use available width without creating a stretched UI */
+@media (min-width: 1400px) {
+  .container {
+    width: min(1440px, calc(100% - 112px));
+  }
+}
+
+/* Tablet/mobile navigation: keep the links visible and readable */
+@media (max-width: 900px) {
+  nav {
+    gap: 16px;
+  }
+
+  .nav-links {
+    display: flex !important;
+    gap: 15px;
+    flex-shrink: 0;
+  }
+
+  .nav-links a {
+    font-size: 0.70rem;
+    white-space: nowrap;
+  }
+}
+
+/* Small phones: compact but still readable */
+@media (max-width: 600px) {
+  nav {
+    height: 68px;
+    padding: 0 14px;
+    gap: 10px;
+  }
+
+  .brand-logo-container {
+    gap: 6px;
+    min-width: 0;
+  }
+
+  .brand-logo-container img {
+    height: 32px;
+  }
+
+  .brand-text {
+    font-size: 1.12rem;
+    letter-spacing: 0.2px;
+  }
+
+  .nav-links {
+    gap: 8px;
+  }
+
+  .nav-links a {
+    font-size: 0.60rem;
+  }
+
+  .hero {
+    padding-top: 22px;
+    margin-bottom: 58px;
+  }
+
+  h1 {
+    letter-spacing: -0.045em;
+  }
+
+  .hero-sub {
+    max-width: 100%;
+  }
+
+  .card-zplayer .app-badge {
+    padding-right: 88px;
+  }
+
+  .card-zplayer::before {
+    top: 17px;
+    right: 16px;
+    font-size: 0.52rem;
+  }
+}
+
+/* Very narrow phones: avoid navbar collisions */
+@media (max-width: 390px) {
+  nav {
+    padding: 0 10px;
+  }
+
+  .brand-text {
+    font-size: 1.02rem;
+  }
+
+  .brand-logo-container img {
+    height: 30px;
+  }
+
+  .nav-links {
+    gap: 6px;
+  }
+
+  .nav-links a {
+    font-size: 0.56rem;
+  }
+}
+
 </style>
 </head>
 
