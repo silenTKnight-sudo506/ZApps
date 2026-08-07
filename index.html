@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Z Apps — Performance-Driven Android Utilities</title>
-  
+
   <!-- Modern Tech Fonts (Outfit for headings, Inter for body text) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,7 @@
       --text-muted: #8B949E;
       --border-color: #30363D;
       --shadow-color: #000000;
-      
+
       /* App Specific Accents */
       --accent-zplayer: #22C55E; /* Neon Green */
       --accent-znotes: #F97316;  /* Neon Orange */
@@ -51,9 +51,14 @@
       background-color: var(--bg-dark);
     }
 
+    /*
+      Brand alignment:
+      The logo and APPS text are aligned to their
+      bottom edges instead of being vertically centered.
+    */
     .brand-logo-container {
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       gap: 12px;
       text-decoration: none;
     }
@@ -73,6 +78,7 @@
       color: var(--logo-green);
       text-transform: uppercase;
       line-height: 1;
+      margin-bottom: 0;
     }
 
     /* Main Container */
@@ -142,17 +148,47 @@
     }
 
     /* App-Specific Hover Overrides */
-    .card-zplayer:hover { border-color: var(--accent-zplayer); }
-    .card-zplayer .app-badge { background-color: rgba(34, 197, 94, 0.1); color: var(--accent-zplayer); border: 1px solid var(--accent-zplayer); }
-    .card-zplayer .app-title { color: var(--accent-zplayer); }
+    .card-zplayer:hover {
+      border-color: var(--accent-zplayer);
+    }
 
-    .card-upcoming-1:hover { border-color: var(--accent-znotes); }
-    .card-upcoming-1 .app-badge { background-color: rgba(249, 115, 22, 0.1); color: var(--accent-znotes); border: 1px solid var(--accent-znotes); }
-    .card-upcoming-1 .app-title { color: var(--accent-znotes); }
+    .card-zplayer .app-badge {
+      background-color: rgba(34, 197, 94, 0.1);
+      color: var(--accent-zplayer);
+      border: 1px solid var(--accent-zplayer);
+    }
 
-    .card-upcoming-2:hover { border-color: var(--accent-zfiles); }
-    .card-upcoming-2 .app-badge { background-color: rgba(59, 130, 246, 0.1); color: var(--accent-zfiles); border: 1px solid var(--accent-zfiles); }
-    .card-upcoming-2 .app-title { color: var(--accent-zfiles); }
+    .card-zplayer .app-title {
+      color: var(--accent-zplayer);
+    }
+
+    .card-upcoming-1:hover {
+      border-color: var(--accent-znotes);
+    }
+
+    .card-upcoming-1 .app-badge {
+      background-color: rgba(249, 115, 22, 0.1);
+      color: var(--accent-znotes);
+      border: 1px solid var(--accent-znotes);
+    }
+
+    .card-upcoming-1 .app-title {
+      color: var(--accent-znotes);
+    }
+
+    .card-upcoming-2:hover {
+      border-color: var(--accent-zfiles);
+    }
+
+    .card-upcoming-2 .app-badge {
+      background-color: rgba(59, 130, 246, 0.1);
+      color: var(--accent-zfiles);
+      border: 1px solid var(--accent-zfiles);
+    }
+
+    .card-upcoming-2 .app-title {
+      color: var(--accent-zfiles);
+    }
 
     .app-badge {
       align-self: flex-start;
@@ -205,7 +241,7 @@
       text-transform: uppercase;
       letter-spacing: 1px;
     }
-    
+
     .app-link:hover {
       opacity: 0.7;
     }
@@ -273,6 +309,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <!-- Header Nav -->
@@ -285,73 +322,130 @@
 
   <!-- Main Content -->
   <div class="container">
-    
+
     <!-- Hero -->
     <header class="hero">
       <h1>
         Software for the <br>
         <span class="highlight">Minimal & Uncluttered.</span>
       </h1>
+
       <p class="hero-sub">
-        An independent development studio focused on building high-performance, resource-light native utilities for Android.
+        An independent development studio focused on building
+        high-performance, resource-light native utilities for Android.
       </p>
     </header>
 
     <!-- App Portfolio Grid -->
     <h2 class="section-title">The Portfolio</h2>
+
     <div class="app-grid">
-      
+
       <!-- App 1: Z Player -->
       <div class="app-card card-zplayer">
+
         <div class="app-badge">Released</div>
-        <img src="assets/ZPlayer.png" alt="Z Player Logo" class="app-icon-img">
+
+        <img
+          src="assets/ZPlayer.png"
+          alt="Z Player Logo"
+          class="app-icon-img"
+        >
+
         <div class="app-title">Z Player</div>
+
         <p class="app-desc">
-          An Android-first media player built for smooth local playback without unnecessary background overhead. High performance meets aesthetic card previews.
+          An Android-first media player built for smooth local playback
+          without unnecessary background overhead. High performance meets
+          aesthetic card previews.
         </p>
-        <a href="https://github.com/silenTKnight-sudo506/ZPlayer/tree/main" target="_blank" class="app-link">View Source <span>&rarr;</span></a>
+
+        <a
+          href="https://github.com/silenTKnight-sudo506/ZPlayer/tree/main"
+          target="_blank"
+          class="app-link"
+        >
+          View Source <span>&rarr;</span>
+        </a>
+
       </div>
 
       <!-- App 2: Placeholder -->
       <div class="app-card card-upcoming-1">
+
         <div class="app-badge">In Development</div>
+
         <div class="app-icon">📝</div>
+
         <div class="app-title">Project 02</div>
+
         <p class="app-desc">
-          Currently in the ideation phase. Focused on streamlining daily productivity with zero bloat and absolute local privacy.
+          Currently in the ideation phase. Focused on streamlining daily
+          productivity with zero bloat and absolute local privacy.
         </p>
-        <a href="#" class="app-link">Coming Soon <span>&rarr;</span></a>
+
+        <a href="#" class="app-link">
+          Coming Soon <span>&rarr;</span>
+        </a>
+
       </div>
 
       <!-- App 3: Placeholder -->
       <div class="app-card card-upcoming-2">
+
         <div class="app-badge">Concept</div>
+
         <div class="app-icon">📁</div>
+
         <div class="app-title">Project 03</div>
+
         <p class="app-desc">
-          Exploring advanced local file management utilizing the same card-driven interface philosophy established in Z Player.
+          Exploring advanced local file management utilizing the same
+          card-driven interface philosophy established in Z Player.
         </p>
-        <a href="#" class="app-link">Coming Soon <span>&rarr;</span></a>
+
+        <a href="#" class="app-link">
+          Coming Soon <span>&rarr;</span>
+        </a>
+
       </div>
 
     </div>
 
     <!-- Core Philosophy -->
     <div class="philosophy">
-      <div class="philosophy-header">Development Philosophy</div>
+
+      <div class="philosophy-header">
+        Development Philosophy
+      </div>
+
       <div class="philosophy-grid">
+
         <div class="phil-item">
           <h3>Zero Bloat</h3>
-          <p>Every line of code serves a purpose. No unnecessary background tasks, no telemetry, and absolute respect for device battery life.</p>
+          <p>
+            Every line of code serves a purpose. No unnecessary background
+            tasks, no telemetry, and absolute respect for device battery life.
+          </p>
         </div>
+
         <div class="phil-item">
           <h3>Card-Driven UI</h3>
-          <p>Moving away from text-heavy spreadsheets. Interfaces should be visual, intuitive, and built for modern tactile navigation.</p>
+          <p>
+            Moving away from text-heavy spreadsheets. Interfaces should be
+            visual, intuitive, and built for modern tactile navigation.
+          </p>
         </div>
+
         <div class="phil-item">
           <h3>Local First</h3>
-          <p>Your data belongs on your device. Z Apps are designed to work flawlessly offline, prioritizing local storage indexing over cloud dependency.</p>
+          <p>
+            Your data belongs on your device. Z Apps are designed to work
+            flawlessly offline, prioritizing local storage indexing over
+            cloud dependency.
+          </p>
         </div>
+
       </div>
     </div>
 
@@ -359,7 +453,14 @@
 
   <!-- Footer -->
   <footer>
-    <p>Crafted by Zulquar (<a href="https://github.com/silenTKnight-sudo506" target="_blank">silenTKnight-sudo506</a>) · Open Source MIT License</p>
+    <p>
+      Crafted by Zulquar
+      (<a
+        href="https://github.com/silenTKnight-sudo506"
+        target="_blank"
+      >silenTKnight-sudo506</a>)
+      · Open Source MIT License
+    </p>
   </footer>
 
 </body>
