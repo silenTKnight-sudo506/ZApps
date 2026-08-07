@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Z Apps — Performance-Driven Android Utilities</title>
+  
+  <!-- Modern Tech Fonts (Outfit for headings, Inter for body text) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #0D1117;
+      --bg-darker: #010409;
+      --card-bg: #161B22;
+      --text-light: #F0F6FC;
+      --text-muted: #8B949E;
+      --border-color: #30363D;
+      --shadow-color: #000000;
+      
+      /* App Specific Accents */
+      --accent-zplayer: #22C55E; /* Neon Green */
+      --accent-znotes: #F97316;  /* Neon Orange */
+      --accent-zfiles: #3B82F6;  /* Neon Blue */
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Navbar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 5%;
+      border-bottom: 1px solid var(--border-color);
+      background-color: var(--bg-dark);
+    }
+
+    .brand-title {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: 1.8rem;
+      letter-spacing: -0.5px;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-title span {
+      background: var(--text-light);
+      color: var(--bg-dark);
+      padding: 2px 10px;
+      border-radius: 6px;
+      font-size: 1.4rem;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: left;
+      margin-bottom: 100px;
+    }
+
+    h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      color: var(--text-muted);
+    }
+
+    h1 .highlight {
+      color: var(--text-light);
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 600px;
+    }
+
+    /* Section Headers */
+    .section-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    /* App Grid */
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      margin-bottom: 100px;
+    }
+
+    .app-card {
+      background: var(--card-bg);
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      padding: 32px;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .app-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 8px 8px 0px var(--shadow-color);
+    }
+
+    /* App-Specific Hover Overrides */
+    .card-zplayer:hover { border-color: var(--accent-zplayer); }
+    .card-zplayer .app-badge { background-color: rgba(34, 197, 94, 0.1); color: var(--accent-zplayer); border: 1px solid var(--accent-zplayer); }
+    .card-zplayer .app-title { color: var(--accent-zplayer); }
+
+    .card-upcoming-1:hover { border-color: var(--accent-znotes); }
+    .card-upcoming-1 .app-badge { background-color: rgba(249, 115, 22, 0.1); color: var(--accent-znotes); border: 1px solid var(--accent-znotes); }
+    .card-upcoming-1 .app-title { color: var(--accent-znotes); }
+
+    .card-upcoming-2:hover { border-color: var(--accent-zfiles); }
+    .card-upcoming-2 .app-badge { background-color: rgba(59, 130, 246, 0.1); color: var(--accent-zfiles); border: 1px solid var(--accent-zfiles); }
+    .card-upcoming-2 .app-title { color: var(--accent-zfiles); }
+
+
+    .app-badge {
+      align-self: flex-start;
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .app-icon {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .app-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 900;
+      margin-bottom: 12px;
+      transition: color 0.2s ease;
+    }
+
+    .app-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 32px;
+      flex-grow: 1;
+    }
+
+    .app-link {
+      display: inline-flex;
+      align-items: center;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: opacity 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .app-link:hover {
+      opacity: 0.7;
+    }
+
+    .app-link span {
+      margin-left: 8px;
+      transition: transform 0.2s;
+    }
+
+    .app-card:hover .app-link span {
+      transform: translateX(6px);
+    }
+
+    /* Philosophy Section */
+    .philosophy {
+      background: var(--bg-darker);
+      border-radius: 16px;
+      padding: 48px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 80px;
+    }
+
+    .philosophy-header {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 900;
+      margin-bottom: 32px;
+    }
+
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 32px;
+    }
+
+    .phil-item h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+      color: var(--text-light);
+    }
+
+    .phil-item p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 40px 24px;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    footer a {
+      color: var(--text-light);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Nav -->
+  <nav>
+    <div class="brand-title">
+      <span>Z</span> Apps
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+    
+    <!-- Hero -->
+    <header class="hero">
+      <h1>
+        Software for the <br>
+        <span class="highlight">Minimal & Uncluttered.</span>
+      </h1>
+      <p class="hero-sub">
+        An independent development studio focused on building high-performance, resource-light native utilities for Android.
+      </p>
+    </header>
+
+    <!-- App Portfolio Grid -->
+    <h2 class="section-title">The Portfolio</h2>
+    <div class="app-grid">
+      
+      <!-- App 1: Z Player -->
+      <div class="app-card card-zplayer">
+        <div class="app-badge">Released</div>
+        <div class="app-icon">▶️</div>
+        <div class="app-title">Z Player</div>
+        <p class="app-desc">
+          An Android-first media player built for smooth local playback without unnecessary background overhead. High performance meets aesthetic card previews.
+        </p>
+        <a href="https://silentknight-sudo506.github.io/ZPlayer/" class="app-link">Visit Site <span>&rarr;</span></a>
+      </div>
+
+      <!-- App 2: Placeholder -->
+      <div class="app-card card-upcoming-1">
+        <div class="app-badge">In Development</div>
+        <div class="app-icon">📝</div>
+        <div class="app-title">Project 02</div>
+        <p class="app-desc">
+          Currently in the ideation phase. Focused on streamlining daily productivity with zero bloat and absolute local privacy.
+        </p>
+        <a href="#" class="app-link">Coming Soon <span>&rarr;</span></a>
+      </div>
+
+      <!-- App 3: Placeholder -->
+      <div class="app-card card-upcoming-2">
+        <div class="app-badge">Concept</div>
+        <div class="app-icon">📁</div>
+        <div class="app-title">Project 03</div>
+        <p class="app-desc">
+          Exploring advanced local file management utilizing the same card-driven interface philosophy established in Z Player.
+        </p>
+        <a href="#" class="app-link">Coming Soon <span>&rarr;</span></a>
+      </div>
+
+    </div>
+
+    <!-- Core Philosophy -->
+    <div class="philosophy">
+      <div class="philosophy-header">Development Philosophy</div>
+      <div class="philosophy-grid">
+        <div class="phil-item">
+          <h3>Zero Bloat</h3>
+          <p>Every line of code serves a purpose. No unnecessary background tasks, no telemetry, and absolute respect for device battery life.</p>
+        </div>
+        <div class="phil-item">
+          <h3>Card-Driven UI</h3>
+          <p>Moving away from text-heavy spreadsheets. Interfaces should be visual, intuitive, and built for modern tactile navigation.</p>
+        </div>
+        <div class="phil-item">
+          <h3>Local First</h3>
+          <p>Your data belongs on your device. Z Apps are designed to work flawlessly offline, prioritizing local storage indexing over cloud dependency.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>Crafted by Zulquar (<a href="https://github.com/silenTKnight-sudo506">silenTKnight-sudo506</a>) · Open Source MIT License</p>
+  </footer>
+
+</body>
+</html>
