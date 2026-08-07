@@ -50,16 +50,27 @@
       background-color: var(--bg-dark);
     }
 
-    .brand-logo {
+    .brand-logo-container {
       display: flex;
       align-items: center;
+      gap: 14px;
+      text-decoration: none;
     }
 
-    .brand-logo img {
-      height: 40px;
+    .brand-logo-container img {
+      height: 48px;
       width: auto;
       display: block;
-      border-radius: 8px;
+      border-radius: 10px;
+    }
+
+    .brand-text {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      color: var(--text-light);
+      text-transform: uppercase;
     }
 
     /* Main Container */
@@ -264,9 +275,10 @@
 
   <!-- Header Nav -->
   <nav>
-    <div class="brand-logo">
+    <a href="#" class="brand-logo-container">
       <img src="assets/ZAPPS.png" alt="Z Apps Logo">
-    </div>
+      <span class="brand-text">Apps</span>
+    </a>
   </nav>
 
   <!-- Main Content -->
