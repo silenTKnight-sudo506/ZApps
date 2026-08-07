@@ -45,28 +45,21 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 24px 5%;
+      padding: 20px 5%;
       border-bottom: 1px solid var(--border-color);
       background-color: var(--bg-dark);
     }
 
-    .brand-title {
-      font-family: 'Outfit', sans-serif;
-      font-weight: 900;
-      font-size: 1.8rem;
-      letter-spacing: -0.5px;
-      color: var(--text-light);
+    .brand-logo {
       display: flex;
       align-items: center;
-      gap: 12px;
     }
 
-    .brand-title span {
-      background: var(--text-light);
-      color: var(--bg-dark);
-      padding: 2px 10px;
-      border-radius: 6px;
-      font-size: 1.4rem;
+    .brand-logo img {
+      height: 40px;
+      width: auto;
+      display: block;
+      border-radius: 8px;
     }
 
     /* Main Container */
@@ -148,7 +141,6 @@
     .card-upcoming-2 .app-badge { background-color: rgba(59, 130, 246, 0.1); color: var(--accent-zfiles); border: 1px solid var(--accent-zfiles); }
     .card-upcoming-2 .app-title { color: var(--accent-zfiles); }
 
-
     .app-badge {
       align-self: flex-start;
       padding: 6px 14px;
@@ -158,6 +150,15 @@
       letter-spacing: 1px;
       text-transform: uppercase;
       margin-bottom: 24px;
+    }
+
+    .app-icon-img {
+      width: 56px;
+      height: 56px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      border: 1px solid var(--border-color);
     }
 
     .app-icon {
@@ -263,8 +264,8 @@
 
   <!-- Header Nav -->
   <nav>
-    <div class="brand-title">
-      <span>Z</span> Apps
+    <div class="brand-logo">
+      <img src="assets/ZAPPS.png" alt="Z Apps Logo">
     </div>
   </nav>
 
@@ -289,12 +290,12 @@
       <!-- App 1: Z Player -->
       <div class="app-card card-zplayer">
         <div class="app-badge">Released</div>
-        <div class="app-icon">▶️</div>
+        <img src="assets/ZPlayer.png" alt="Z Player Logo" class="app-icon-img">
         <div class="app-title">Z Player</div>
         <p class="app-desc">
           An Android-first media player built for smooth local playback without unnecessary background overhead. High performance meets aesthetic card previews.
         </p>
-        <a href="https://github.com/silenTKnight-sudo506/ZPlayer/" class="app-link">Visit to Download <span>&rarr;</span></a>
+        <a href="https://github.com/silenTKnight-sudo506/ZPlayer/tree/main" target="_blank" class="app-link">View Source <span>&rarr;</span></a>
       </div>
 
       <!-- App 2: Placeholder -->
@@ -344,7 +345,7 @@
 
   <!-- Footer -->
   <footer>
-    <p>Crafted by Zulquar (<a href="https://github.com/silenTKnight-sudo506">silenTKnight-sudo506</a>) · Open Source MIT License</p>
+    <p>Crafted by Zulquar (<a href="https://github.com/silenTKnight-sudo506" target="_blank">silenTKnight-sudo506</a>) · Open Source MIT License</p>
   </footer>
 
 </body>
