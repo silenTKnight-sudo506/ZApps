@@ -26,7 +26,7 @@ An independent software development studio focused on building high-performance,
 
 ## 👨‍💻 Author
 
-Crafted by ([silenTKnight-sudo506](https://github.com/silenTKnight-sudo506))
+Crafted by [silenTKnight (https://github.com/silenTKnight-sudo506)
 
 ## 📄 License
 Open source under the [MIT License](LICENSE).
