@@ -84,20 +84,23 @@
 
     /* Main Container */
     .container {
-      max-width: 1000px;
+      width: min(1380px, calc(100% - 96px));
+      max-width: none;
       margin: 0 auto;
-      padding: 80px 24px;
+      padding: 82px 0 72px;
     }
 
     /* Hero Section */
     .hero {
+      position: relative;
       text-align: left;
-      margin-bottom: 100px;
+      margin-bottom: 76px;
+      padding: 34px 0 4px;
     }
 
     h1 {
       font-family: 'Outfit', sans-serif;
-      font-size: clamp(3rem, 8vw, 5rem);
+      font-size: clamp(3.7rem, 7vw, 7.2rem);
       font-weight: 900;
       line-height: 1.1;
       margin-bottom: 24px;
@@ -127,17 +130,17 @@
     /* App Grid */
     .app-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 32px;
-      margin-bottom: 100px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      margin-bottom: 76px;
     }
 
     .app-card {
       background: var(--card-bg);
       border: 2px solid var(--border-color);
       border-radius: 12px;
-      padding: 32px;
-      transition: all 0.2s ease;
+      padding: 30px;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
       display: flex;
       flex-direction: column;
       position: relative;
@@ -292,7 +295,6 @@
 
     /* Footer */
     footer {
-      width: 100%;
       border-top: 1px solid var(--border-color);
       padding: 40px 24px;
       text-align: center;
@@ -397,7 +399,7 @@
     }
 
     h1 {
-      max-width: 1120px;
+      max-width: 900px;
       font-size: clamp(3.5rem, 9vw, 6.7rem);
       letter-spacing: -0.055em;
       line-height: 0.98;
@@ -644,6 +646,25 @@
       }
     }
 
+  
+    .eyebrow{display:inline-flex;border:1px solid rgba(35,197,94,.4);border-radius:999px;padding:7px 13px;color:#23C55E;font-size:.7rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:25px}
+    .nav-links{display:flex;gap:28px;align-items:center}
+    .nav-links a{color:#8B949E;text-decoration:none;font-size:.82rem;font-weight:600}
+    .nav-links a:hover{color:#F0F6FC}.nav-links .nav-github{color:#23C55E}
+    .section-title{display:flex;align-items:center;gap:12px}.section-title::before{content:"";width:8px;height:8px;border-radius:50%;background:#23C55E;box-shadow:0 0 14px rgba(35,197,94,.5)}
+    .app-card{min-height:430px;border-radius:15px}
+    .card-zplayer{border-color:rgba(35,197,94,.65);box-shadow:0 0 0 1px rgba(35,197,94,.08)}
+    .card-zplayer:hover{box-shadow:0 18px 45px rgba(0,0,0,.3),0 0 28px rgba(35,197,94,.1),8px 8px 0 rgba(0,0,0,.55)}
+    .app-icon{width:62px;height:62px;border:1px solid var(--border-color);border-radius:14px;display:grid;place-items:center;font-size:1.9rem;margin-bottom:19px;background:#10151B}
+    .philosophy{position:relative;overflow:hidden;padding:42px;margin-bottom:62px;background:linear-gradient(145deg,#010409,#030A08)}
+    .phil-item{padding:24px;border:1px solid #202731;border-radius:13px;background:rgba(0,0,0,.16)}
+    .phil-index{font-family:'Outfit',sans-serif;color:#23C55E;font-size:.7rem;font-weight:800;letter-spacing:1.5px;margin-bottom:15px}
+    .github-cta{display:flex;align-items:center;justify-content:space-between;gap:25px;padding:27px 30px;border:1px solid rgba(35,197,94,.22);border-radius:14px;background:rgba(35,197,94,.025);margin-bottom:62px}
+    .github-cta h3{font-family:'Outfit',sans-serif;font-size:1.35rem;margin-bottom:3px}.github-cta p{color:#8B949E;font-size:.88rem}
+    .github-button{display:inline-flex;align-items:center;padding:11px 16px;border-radius:9px;background:#23C55E;color:#061008;text-decoration:none;font-weight:800;font-size:.82rem;white-space:nowrap}
+    @media(max-width:900px){.container{width:min(100% - 40px,700px)}.app-grid{grid-template-columns:1fr}.philosophy-grid{grid-template-columns:1fr}.nav-links{display:none}}
+    @media(max-width:600px){.container{width:auto;padding:58px 20px}.app-card{min-height:370px}.github-cta{align-items:flex-start;flex-direction:column}.github-button{width:100%;text-align:center}}
+
   </style>
 </head>
 
@@ -655,6 +676,11 @@
       <img src="assets/ZAPPS.png" alt="Z Apps Logo">
       <span class="brand-text">APPS</span>
     </a>
+    <div class="nav-links">
+      <a href="#portfolio">Apps</a>
+      <a href="#philosophy">Philosophy</a>
+      <a class="nav-github" href="https://github.com/silenTKnight-sudo506" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
   </nav>
 
   <!-- Main Content -->
@@ -662,6 +688,7 @@
 
     <!-- Hero -->
     <header class="hero">
+      <div class="eyebrow">Z Apps / Android Utilities</div>
       <h1>
         Software for the <br>
         <span class="highlight">Minimal & Uncluttered.</span>
@@ -674,6 +701,7 @@
     </header>
 
     <!-- App Portfolio Grid -->
+    <section id="portfolio">
     <h2 class="section-title">The Portfolio</h2>
 
     <div class="app-grid">
@@ -681,7 +709,7 @@
       <!-- App 1: Z Player -->
       <div class="app-card card-zplayer">
 
-        <div class="app-badge">Released</div>
+        <div class="app-badge">Released · Featured</div>
 
         <img
           src="assets/ZPlayer.png"
@@ -748,9 +776,10 @@
       </div>
 
     </div>
+  </section>
 
     <!-- Core Philosophy -->
-    <div class="philosophy">
+    <div class="philosophy" id="philosophy">
 
       <div class="philosophy-header">
         Development Philosophy
@@ -759,7 +788,7 @@
       <div class="philosophy-grid">
 
         <div class="phil-item">
-          <h3>Zero Bloat</h3>
+          <div class="phil-index">01 / PRINCIPLE</div><h3>Zero Bloat</h3>
           <p>
             Every line of code serves a purpose. No unnecessary background
             tasks, no telemetry, and absolute respect for device battery life.
@@ -767,7 +796,7 @@
         </div>
 
         <div class="phil-item">
-          <h3>Card-Driven UI</h3>
+          <div class="phil-index">02 / PRINCIPLE</div><h3>Card-Driven UI</h3>
           <p>
             Moving away from text-heavy spreadsheets. Interfaces should be
             visual, intuitive, and built for modern tactile navigation.
@@ -775,7 +804,7 @@
         </div>
 
         <div class="phil-item">
-          <h3>Local First</h3>
+          <div class="phil-index">03 / PRINCIPLE</div><h3>Local First</h3>
           <p>
             Your data belongs on your device. Z Apps are designed to work
             flawlessly offline, prioritizing local storage indexing over
@@ -785,6 +814,16 @@
 
       </div>
     </div>
+
+  </div>
+
+  <section class="github-cta">
+    <div>
+      <h3>Built in public.</h3>
+      <p>Explore the source, follow development, and see what's coming next.</p>
+    </div>
+    <a class="github-button" href="https://github.com/silenTKnight-sudo506" target="_blank" rel="noopener">Explore GitHub ↗</a>
+  </section>
 
   </div>
 
