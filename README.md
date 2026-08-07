@@ -4,10 +4,7 @@
 
 ### Lightweight software. Local-first. Privacy-focused.
 
-Independent software development studio building
-**high-performance, resource-light native utilities for Android.**
-
-<br>
+Independent software development studio building **high-performance, resource-light native utilities for Android.**
 
 🌐 **[z-apps.pages.dev](https://z-apps.pages.dev)**
 
@@ -17,22 +14,74 @@ Independent software development studio building
 
 ## 🚀 Projects
 
-<table>
-<tr>
-<td width="180" align="center">
+### 🟢 Z Player (Released)
+<img src="assets/ZPlayer.png" width="100" alt="Z Player">
 
-<img src="assets/ZPlayer.png" width="150" alt="Z Player">
+A smooth, lightweight local media player built for a fast and distraction-free experience.
 
-</td>
-<td>
+* **🎵 Local Playback**  
+* **⚡ Low Overhead**  
+* **🛡️ Privacy First**  
+* **✈️ Offline Ready**
 
-### Z Player
-**🟢 Released**
+[View Repository →](https://github.com/silenTKnight-sudo506/ZPlayer)
 
-A smooth, lightweight local media player built for a
-fast and distraction-free experience.
+---
 
-**🎵 Local Playback**  
+### 🟡 Project 02 (In Development)
+<img src="assets/ZAPPS.png" width="100" alt="Z Apps Logo">
+
+A next-generation Android utility focused on **daily productivity, local functionality, and privacy.**
+
+_Coming soon._
+
+---
+
+### 🔵 Project 03 (Concept)
+<img src="assets/ZAPPS.png" width="100" alt="Z Apps Logo">
+
+An advanced **local-first file management system** designed around speed, simplicity, and user control.
+
+_Coming soon._
+
+---
+
+## 💡 Philosophy
+
+* **⚡ Zero Bloat:** No unnecessary background services, telemetry, or resource-heavy features.
+* **🎨 Clear UI:** Clean interfaces designed for quick and intuitive interaction.
+* **🔒 Local First:** Prefer offline functionality and local storage over unnecessary cloud dependency.
+
+---
+
+## 🎯 What's Next?
+
+> **Software should respect your device, your resources, and your privacy.**
+
+More lightweight Android utilities are currently being explored and developed.
+
+---
+
+## 👤 Author
+
+**silenTKnight**
+
+Independent developer building lightweight software and exploring:
+`Android` · `Linux` · `Privacy-focused computing`
+
+---
+
+## 📄 License
+
+Open source under the **[MIT License](LICENSE)**.
+
+---
+
+<div align="center">
+
+⚡ **Lightweight** &nbsp; · &nbsp; 🔒 **Private** &nbsp; · &nbsp; 📱 **Local-first**
+
+</div>
 **⚡ Low Overhead**  
 **🛡️ Privacy First**  
 **✈️ Offline Ready**
