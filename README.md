@@ -31,7 +31,8 @@ A smooth, lightweight local media player built for a fast and distraction-free e
 ---
 
 ### 🟡 Project 02 (In Development)
-<h1>🛠️</h1>
+<img src="assets/ZNote.png" width="100" alt="Z Notes">
+
 
 A next-generation Android utility focused on **daily productivity, local functionality, and privacy.**
 
@@ -40,7 +41,7 @@ _Coming soon._
 ---
 
 ### 🔵 Project 03 (Concept)
-<img src="assets/ZNote.png" width="100" alt="Z Notes">
+<h1>📁</h1>
 
 An advanced **local-first file management system** designed around speed, simplicity, and user control.
 
