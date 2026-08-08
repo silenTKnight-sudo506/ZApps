@@ -40,7 +40,7 @@ _Coming soon._
 ---
 
 ### 🔵 Project 03 (Concept)
-<h1>📁</h1>
+<img src="assets/ZNote.png" width="100" alt="Z Notes">
 
 An advanced **local-first file management system** designed around speed, simplicity, and user control.
 
