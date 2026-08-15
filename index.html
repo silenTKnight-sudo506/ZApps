@@ -1,312 +1,1241 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Z Apps — Performance-Driven Android Utilities</title>
+
+  <meta
+    name="description"
+    content="Z Apps is an independent development studio building minimal, high-performance, resource-light Android utilities."
+  >
 
   <link rel="icon" type="image/png" href="assets/ZAPPS.png">
 
-  <!-- Modern Tech Fonts (Outfit for headings, Inter for body text) -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;900&display=swap" rel="stylesheet">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
-    :root {
-      --bg-dark: #0D1117;
-      --bg-darker: #010409;
-      --card-bg: #161B22;
-      --text-light: #F0F6FC;
-      --text-muted: #8B949E;
-      --border-color: #30363D;
-      --shadow-color: #000000;
 
-      /* App Specific Accents */
-      --accent-zplayer: #22C55E; /* Neon Green */
-      --accent-znotes: #F97316;  /* Neon Orange */
-      --accent-zfiles: #3B82F6;  /* Neon Blue */
-      --logo-green: #92d254;     /* Requested brand color */
+    /* =========================================================
+       ROOT
+       ========================================================= */
+
+    :root {
+      --bg: #07100b;
+      --bg-deep: #030805;
+      --surface: #0c1510;
+      --surface-soft: #101b14;
+
+      --text: #eef4ef;
+      --text-soft: #c8d1ca;
+      --muted: #89958c;
+
+      --border: rgba(255, 255, 255, 0.09);
+      --border-soft: rgba(255, 255, 255, 0.055);
+
+      --green: #92d254;
+      --green-bright: #b8f17a;
+      --green-deep: #4f9d35;
+
+      --zplayer: #22c55e;
+      --znotes: #f97316;
+      --zfiles: #3b82f6;
+
+      --max-width: 1380px;
+
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 22px;
+
+      --shadow:
+        0 24px 70px rgba(0, 0, 0, 0.32);
     }
 
-    * {
+
+    /* =========================================================
+       RESET
+       ========================================================= */
+
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg-deep);
+    }
+
     body {
-      background-color: var(--bg-dark);
-      color: var(--text-light);
-      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+
+      color: var(--text);
+
+      font-family: "Inter", sans-serif;
       line-height: 1.6;
+
+      background:
+        radial-gradient(
+          circle at 12% 8%,
+          rgba(91, 180, 65, 0.10),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 88% 20%,
+          rgba(61, 132, 73, 0.07),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 50% 65%,
+          rgba(48, 100, 52, 0.035),
+          transparent 42%
+        ),
+        linear-gradient(
+          180deg,
+          #09110c 0%,
+          #07100b 45%,
+          #030805 100%
+        );
+
       overflow-x: hidden;
     }
 
-    /* Navbar */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 5%;
-      border-bottom: 1px solid var(--border-color);
-      background-color: var(--bg-dark);
+    a {
+      color: inherit;
     }
 
-    /*
-      Brand alignment:
-      The logo and APPS text are aligned to their
-      bottom edges instead of being vertically centered.
-    */
-    .brand-logo-container {
+    ::selection {
+      color: #07100b;
+      background: var(--green-bright);
+    }
+
+
+    /* =========================================================
+       AMBIENT BACKGROUND
+       ========================================================= */
+
+    body::before {
+      content: "";
+
+      position: fixed;
+      inset: 0;
+
+      pointer-events: none;
+
+      z-index: -3;
+
+      background:
+        radial-gradient(
+          ellipse at 50% -15%,
+          rgba(146, 210, 84, 0.055),
+          transparent 45%
+        );
+    }
+
+    body::after {
+      content: "";
+
+      position: fixed;
+      width: 700px;
+      height: 700px;
+
+      top: -330px;
+      right: -250px;
+
+      border-radius: 50%;
+
+      border: 1px solid rgba(146, 210, 84, 0.035);
+
+      box-shadow:
+        0 0 0 70px rgba(146, 210, 84, 0.012),
+        0 0 0 140px rgba(146, 210, 84, 0.008);
+
+      pointer-events: none;
+
+      z-index: -2;
+    }
+
+
+    /* =========================================================
+       NAVIGATION
+       ========================================================= */
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+
+      width: 100%;
+      height: 74px;
+
       display: flex;
       align-items: center;
+      justify-content: space-between;
+
+      padding: 0 5%;
+
+      border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(7, 16, 11, 0.92),
+          rgba(7, 16, 11, 0.76)
+        );
+
+      backdrop-filter: blur(22px) saturate(140%);
+      -webkit-backdrop-filter: blur(22px) saturate(140%);
+    }
+
+    .brand-logo-container {
+      display: inline-flex;
+      align-items: center;
       gap: 10px;
+
       text-decoration: none;
+
+      transition:
+        transform 220ms ease,
+        opacity 220ms ease;
+    }
+
+    .brand-logo-container:hover {
+      transform: translateY(-1px);
+      opacity: 0.92;
     }
 
     .brand-logo-container img {
+      width: 40px;
       height: 40px;
-      width: auto;
+
       display: block;
-      border-radius: 8px;
+
+      object-fit: cover;
+
+      border-radius: 10px;
+
+      box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.28),
+        0 0 0 1px rgba(255, 255, 255, 0.06);
     }
 
     .brand-text {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.55rem;
+      color: var(--green);
+
+      font-family: "Outfit", sans-serif;
+
+      font-size: 1.48rem;
       font-weight: 900;
-      letter-spacing: 0.5px;
-      color: var(--logo-green);
-      text-transform: uppercase;
+
+      letter-spacing: 0.3px;
       line-height: 1;
-      margin-bottom: 0;
-      transform: translateY(2px);
+
+      text-transform: uppercase;
+
+      text-shadow:
+        0 0 28px rgba(146, 210, 84, 0.12);
     }
 
-    /* Main Container */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      position: relative;
+
+      color: var(--muted);
+
+      font-size: 0.82rem;
+      font-weight: 600;
+
+      text-decoration: none;
+
+      transition:
+        color 200ms ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+
+      position: absolute;
+      left: 0;
+      right: 100%;
+      bottom: -7px;
+
+      height: 1px;
+
+      background: var(--green);
+
+      transition: right 220ms ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-links a:hover::after {
+      right: 0;
+    }
+
+    .nav-links .nav-github {
+      color: var(--green);
+    }
+
+
+    /* =========================================================
+       MAIN CONTAINER
+       ========================================================= */
+
     .container {
-      width: min(1380px, calc(100% - 96px));
-      max-width: none;
+      width: min(var(--max-width), calc(100% - 96px));
+
       margin: 0 auto;
-      padding: 82px 0 72px;
+
+      padding: 92px 0 80px;
     }
 
-    /* Hero Section */
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+
     .hero {
       position: relative;
-      text-align: left;
-      margin-bottom: 76px;
-      padding: 34px 0 4px;
+
+      margin-bottom: 112px;
+
+      padding: 34px 0 0;
+    }
+
+    .hero::before {
+      content: "";
+
+      position: absolute;
+
+      width: 520px;
+      height: 520px;
+
+      left: -180px;
+      top: -180px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(103, 183, 68, 0.085),
+          transparent 68%
+        );
+
+      filter: blur(18px);
+
+      pointer-events: none;
+
+      z-index: -1;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      margin-bottom: 27px;
+
+      padding: 7px 13px;
+
+      border: 1px solid rgba(146, 210, 84, 0.28);
+
+      border-radius: 999px;
+
+      background: rgba(146, 210, 84, 0.035);
+
+      color: var(--green);
+
+      font-size: 0.68rem;
+      font-weight: 700;
+
+      letter-spacing: 1.5px;
+
+      text-transform: uppercase;
+
+      box-shadow:
+        inset 0 0 18px rgba(146, 210, 84, 0.025);
+    }
+
+    .eyebrow::before {
+      content: "";
+
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: var(--green);
+
+      box-shadow:
+        0 0 12px rgba(146, 210, 84, 0.7);
     }
 
     h1 {
-      font-family: 'Outfit', sans-serif;
-      font-size: clamp(3.7rem, 7vw, 7.2rem);
+      max-width: 1040px;
+
+      font-family: "Outfit", sans-serif;
+
+      font-size: clamp(4rem, 8.7vw, 8.2rem);
+
       font-weight: 900;
-      line-height: 1.1;
-      margin-bottom: 24px;
-      color: var(--text-muted);
+
+      letter-spacing: -0.065em;
+
+      line-height: 0.94;
+
+      text-wrap: balance;
+
+      color: #edf3ee;
     }
 
+    /*
+      Main visual treatment:
+      white → soft grey → green → bright green
+    */
+
     h1 .highlight {
-      color: var(--text-light);
+      display: inline-block;
+
+      background:
+        linear-gradient(
+          100deg,
+          #f0f5f1 0%,
+          #dfe8e1 30%,
+          #c4d8c7 49%,
+          #a6cf78 70%,
+          #92d254 87%,
+          #b7ed7c 100%
+        );
+
+      background-size: 180% auto;
+
+      -webkit-background-clip: text;
+      background-clip: text;
+
+      -webkit-text-fill-color: transparent;
+
+      filter:
+        drop-shadow(
+          0 0 35px rgba(146, 210, 84, 0.045)
+        );
+
+      animation:
+        heroGradient 9s ease-in-out infinite alternate;
+    }
+
+    @keyframes heroGradient {
+      from {
+        background-position: 0% center;
+      }
+
+      to {
+        background-position: 100% center;
+      }
     }
 
     .hero-sub {
-      font-size: 1.15rem;
-      color: var(--text-muted);
-      max-width: 600px;
+      max-width: 650px;
+
+      margin-top: 31px;
+
+      color: var(--muted);
+
+      font-size: 1.05rem;
+      line-height: 1.85;
     }
 
-    /* Section Headers */
+    .hero-sub strong {
+      color: var(--text-soft);
+      font-weight: 600;
+    }
+
+
+    /* =========================================================
+       PORTFOLIO
+       ========================================================= */
+
     .section-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 32px;
-      padding-bottom: 16px;
-      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+
+      margin-bottom: 34px;
+
+      padding-bottom: 17px;
+
+      border-bottom: 1px solid var(--border);
+
+      font-family: "Outfit", sans-serif;
+
+      font-size: 2.1rem;
+      font-weight: 800;
+
+      letter-spacing: -0.025em;
     }
 
-    /* App Grid */
+    .section-title::before {
+      content: "";
+
+      width: 8px;
+      height: 8px;
+
+      flex: 0 0 auto;
+
+      border-radius: 50%;
+
+      background: var(--green);
+
+      box-shadow:
+        0 0 14px rgba(146, 210, 84, 0.55);
+    }
+
+    .section-title::after {
+      content: "";
+
+      height: 1px;
+
+      flex: 1;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.08),
+          transparent
+        );
+    }
+
     .app-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
       gap: 22px;
-      margin-bottom: 76px;
+
+      margin-bottom: 112px;
     }
 
+
+    /* =========================================================
+       APP CARDS
+       ========================================================= */
+
     .app-card {
-      background: var(--card-bg);
-      border: 2px solid var(--border-color);
-      border-radius: 12px;
-      padding: 30px;
-      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      position: relative;
+
+      min-height: 425px;
+
       display: flex;
       flex-direction: column;
-      position: relative;
+
+      overflow: hidden;
+
+      padding: 30px;
+
+      border:
+        1px solid
+        rgba(255, 255, 255, 0.08);
+
+      border-radius: var(--radius-lg);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.035),
+          rgba(255, 255, 255, 0.008) 45%,
+          rgba(0, 0, 0, 0.10)
+        ),
+        var(--surface);
+
+      box-shadow:
+        0 18px 50px rgba(0, 0, 0, 0.17),
+        inset 0 1px 0 rgba(255, 255, 255, 0.025);
+
+      transition:
+        transform 260ms ease,
+        border-color 260ms ease,
+        box-shadow 260ms ease;
+    }
+
+    .app-card::before {
+      content: "";
+
+      position: absolute;
+
+      top: 0;
+      left: 12%;
+      right: 12%;
+
+      height: 1px;
+
+      opacity: 0;
+
+      transition: opacity 260ms ease;
     }
 
     .app-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 8px 8px 0px var(--shadow-color);
+      transform: translateY(-7px);
+
+      box-shadow:
+        0 28px 65px rgba(0, 0, 0, 0.28);
     }
 
-    /* App-Specific Hover Overrides */
+    .app-card:hover::before {
+      opacity: 1;
+    }
+
+
+    /* =========================================================
+       Z PLAYER CARD
+       ========================================================= */
+
+    .card-zplayer {
+      border-color:
+        rgba(34, 197, 94, 0.38);
+
+      background:
+        radial-gradient(
+          circle at 100% 0%,
+          rgba(34, 197, 94, 0.055),
+          transparent 35%
+        ),
+        linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.035),
+          rgba(255, 255, 255, 0.008) 45%
+        ),
+        var(--surface);
+
+      box-shadow:
+        0 18px 50px rgba(0, 0, 0, 0.19),
+        0 0 0 1px rgba(34, 197, 94, 0.045);
+    }
+
+    .card-zplayer::before {
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          var(--zplayer),
+          transparent
+        );
+    }
+
     .card-zplayer:hover {
-      border-color: var(--accent-zplayer);
+      border-color:
+        rgba(34, 197, 94, 0.7);
+
+      box-shadow:
+        0 28px 65px rgba(0, 0, 0, 0.3),
+        0 0 35px rgba(34, 197, 94, 0.08);
     }
 
-    .card-zplayer .app-badge {
-      background-color: rgba(34, 197, 94, 0.1);
-      color: var(--accent-zplayer);
-      border: 1px solid var(--accent-zplayer);
-    }
 
-    .card-zplayer .app-title {
-      color: var(--accent-zplayer);
+    /* =========================================================
+       OTHER CARDS
+       ========================================================= */
+
+    .card-upcoming-1::before {
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          var(--znotes),
+          transparent
+        );
     }
 
     .card-upcoming-1:hover {
-      border-color: var(--accent-znotes);
+      border-color:
+        rgba(249, 115, 22, 0.55);
     }
 
-    .card-upcoming-1 .app-badge {
-      background-color: rgba(249, 115, 22, 0.1);
-      color: var(--accent-znotes);
-      border: 1px solid var(--accent-znotes);
-    }
-
-    .card-upcoming-1 .app-title {
-      color: var(--accent-znotes);
+    .card-upcoming-2::before {
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          var(--zfiles),
+          transparent
+        );
     }
 
     .card-upcoming-2:hover {
-      border-color: var(--accent-zfiles);
+      border-color:
+        rgba(59, 130, 246, 0.55);
     }
 
-    .card-upcoming-2 .app-badge {
-      background-color: rgba(59, 130, 246, 0.1);
-      color: var(--accent-zfiles);
-      border: 1px solid var(--accent-zfiles);
-    }
 
-    .card-upcoming-2 .app-title {
-      color: var(--accent-zfiles);
+    /* =========================================================
+       STATUS ROW
+       ========================================================= */
+
+    .app-status-row {
+      width: 100%;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 12px;
+
+      margin-bottom: 27px;
     }
 
     .app-badge {
-      align-self: flex-start;
-      padding: 6px 14px;
-      border-radius: 50px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 1px;
+      display: inline-flex;
+      align-items: center;
+
+      width: fit-content;
+
+      padding: 6px 11px;
+
+      border-radius: 999px;
+
+      font-size: 0.65rem;
+      font-weight: 800;
+
+      letter-spacing: 1.1px;
+
       text-transform: uppercase;
-      margin-bottom: 24px;
+
+      white-space: nowrap;
     }
 
+    .card-zplayer .app-badge {
+      color: var(--zplayer);
+
+      border:
+        1px solid
+        rgba(34, 197, 94, 0.38);
+
+      background:
+        rgba(34, 197, 94, 0.07);
+    }
+
+    .card-upcoming-1 .app-badge {
+      color: var(--znotes);
+
+      border:
+        1px solid
+        rgba(249, 115, 22, 0.32);
+
+      background:
+        rgba(249, 115, 22, 0.06);
+    }
+
+    .card-upcoming-2 .app-badge {
+      color: var(--zfiles);
+
+      border:
+        1px solid
+        rgba(59, 130, 246, 0.32);
+
+      background:
+        rgba(59, 130, 246, 0.06);
+    }
+
+    .featured-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+
+      padding: 6px 10px;
+
+      border:
+        1px solid
+        rgba(146, 210, 84, 0.2);
+
+      border-radius: 999px;
+
+      background:
+        rgba(146, 210, 84, 0.035);
+
+      color:
+        rgba(184, 241, 122, 0.82);
+
+      font-size: 0.61rem;
+      font-weight: 800;
+
+      letter-spacing: 1px;
+
+      white-space: nowrap;
+    }
+
+    .featured-badge::before {
+      content: "✦";
+
+      color: var(--green-bright);
+
+      font-size: 0.7rem;
+    }
+
+
+    /* =========================================================
+       APP ICONS
+       ========================================================= */
+
     .app-icon-img {
-      width: 56px;
-      height: 56px;
+      width: 64px;
+      height: 64px;
+
+      display: block;
+
       object-fit: cover;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      border: 1px solid var(--border-color);
+
+      margin-bottom: 21px;
+
+      border:
+        1px solid
+        rgba(255, 255, 255, 0.09);
+
+      border-radius: 15px;
+
+      box-shadow:
+        0 10px 24px rgba(0, 0, 0, 0.24);
+
+      transition:
+        transform 260ms ease,
+        box-shadow 260ms ease;
+    }
+
+    .app-card:hover .app-icon-img {
+      transform:
+        translateY(-3px)
+        scale(1.035);
+
+      box-shadow:
+        0 15px 30px rgba(0, 0, 0, 0.3);
     }
 
     .app-icon {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
+      width: 64px;
+      height: 64px;
+
+      display: grid;
+      place-items: center;
+
+      margin-bottom: 21px;
+
+      border:
+        1px solid
+        rgba(255, 255, 255, 0.08);
+
+      border-radius: 15px;
+
+      background:
+        rgba(255, 255, 255, 0.018);
+
+      font-size: 1.8rem;
+
+      transition:
+        transform 260ms ease;
     }
 
+    .app-card:hover .app-icon {
+      transform: translateY(-3px);
+    }
+
+    .card-upcoming-2 .app-icon {
+      color: rgba(59, 130, 246, 0.9);
+    }
+
+
+    /* =========================================================
+       APP CONTENT
+       ========================================================= */
+
     .app-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.8rem;
+      margin-bottom: 13px;
+
+      font-family: "Outfit", sans-serif;
+
+      font-size: 1.85rem;
       font-weight: 900;
-      margin-bottom: 12px;
-      transition: color 0.2s ease;
+
+      letter-spacing: -0.025em;
+    }
+
+    .card-zplayer .app-title {
+      color: var(--zplayer);
+    }
+
+    .card-upcoming-1 .app-title {
+      color: var(--znotes);
+    }
+
+    .card-upcoming-2 .app-title {
+      color: var(--zfiles);
     }
 
     .app-desc {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 32px;
       flex-grow: 1;
+
+      margin-bottom: 30px;
+
+      color: var(--muted);
+
+      font-size: 0.94rem;
+
+      line-height: 1.78;
     }
+
+
+    /* =========================================================
+       APP LINKS
+       ========================================================= */
 
     .app-link {
       display: inline-flex;
       align-items: center;
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: var(--text-light);
-      text-decoration: none;
-      transition: opacity 0.2s;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
+      gap: 8px;
 
-    .app-link:hover {
-      opacity: 0.7;
+      width: fit-content;
+
+      padding-bottom: 5px;
+
+      border-bottom:
+        1px solid
+        transparent;
+
+      color: var(--text-soft);
+
+      font-size: 0.78rem;
+      font-weight: 700;
+
+      letter-spacing: 1.1px;
+
+      text-decoration: none;
+      text-transform: uppercase;
+
+      transition:
+        color 200ms ease,
+        border-color 200ms ease;
     }
 
     .app-link span {
-      margin-left: 8px;
-      transition: transform 0.2s;
+      display: inline-block;
+
+      transition:
+        transform 220ms ease;
+    }
+
+    .app-link:hover {
+      color: var(--text);
+
+      border-bottom-color:
+        rgba(255, 255, 255, 0.25);
     }
 
     .app-card:hover .app-link span {
-      transform: translateX(6px);
+      transform: translateX(5px);
     }
 
-    /* Philosophy Section */
+
+    /* =========================================================
+       PHILOSOPHY
+       ========================================================= */
+
     .philosophy {
-      background: var(--bg-darker);
-      border-radius: 16px;
-      padding: 48px;
-      border: 1px solid var(--border-color);
-      margin-bottom: 80px;
+      position: relative;
+
+      overflow: hidden;
+
+      margin-bottom: 62px;
+
+      padding: 46px;
+
+      border:
+        1px solid
+        rgba(255, 255, 255, 0.07);
+
+      border-radius: var(--radius-lg);
+
+      background:
+        radial-gradient(
+          circle at 100% 0%,
+          rgba(146, 210, 84, 0.075),
+          transparent 32%
+        ),
+        linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.025),
+          transparent 48%
+        ),
+        var(--bg-deep);
+
+      box-shadow:
+        var(--shadow);
+    }
+
+    .philosophy::before {
+      content: "";
+
+      position: absolute;
+
+      width: 280px;
+      height: 280px;
+
+      right: -130px;
+      bottom: -160px;
+
+      border:
+        1px solid
+        rgba(146, 210, 84, 0.08);
+
+      border-radius: 50%;
+
+      box-shadow:
+        0 0 0 35px rgba(146, 210, 84, 0.018),
+        0 0 0 70px rgba(146, 210, 84, 0.01);
+
+      pointer-events: none;
     }
 
     .philosophy-header {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.8rem;
-      font-weight: 900;
       margin-bottom: 32px;
+
+      font-family: "Outfit", sans-serif;
+
+      font-size: 1.9rem;
+      font-weight: 900;
+
+      letter-spacing: -0.02em;
     }
 
     .philosophy-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 32px;
+
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+      gap: 18px;
+    }
+
+    .phil-item {
+      padding: 24px;
+
+      border:
+        1px solid
+        rgba(255, 255, 255, 0.065);
+
+      border-radius: 15px;
+
+      background:
+        rgba(255, 255, 255, 0.012);
+
+      transition:
+        transform 220ms ease,
+        border-color 220ms ease,
+        background 220ms ease;
+    }
+
+    .phil-item:hover {
+      transform: translateY(-4px);
+
+      border-color:
+        rgba(146, 210, 84, 0.22);
+
+      background:
+        rgba(146, 210, 84, 0.025);
+    }
+
+    .phil-index {
+      margin-bottom: 15px;
+
+      color: var(--green);
+
+      font-family: "Outfit", sans-serif;
+
+      font-size: 0.67rem;
+      font-weight: 800;
+
+      letter-spacing: 1.5px;
     }
 
     .phil-item h3 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 1.1rem;
-      margin-bottom: 12px;
-      color: var(--text-light);
+      margin-bottom: 11px;
+
+      color: var(--text);
+
+      font-family: "Outfit", sans-serif;
+
+      font-size: 1.12rem;
+      font-weight: 700;
     }
 
     .phil-item p {
-      color: var(--text-muted);
-      font-size: 0.9rem;
+      color: var(--muted);
+
+      font-size: 0.88rem;
+
+      line-height: 1.75;
     }
 
-    /* Footer */
+
+    /* =========================================================
+       GITHUB CTA
+       ========================================================= */
+
+    .github-cta {
+      position: relative;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 28px;
+
+      overflow: hidden;
+
+      margin-bottom: 0;
+
+      padding: 30px;
+
+      border:
+        1px solid
+        rgba(146, 210, 84, 0.18);
+
+      border-radius: var(--radius-md);
+
+      background:
+        linear-gradient(
+          105deg,
+          rgba(146, 210, 84, 0.035),
+          rgba(146, 210, 84, 0.012)
+        );
+    }
+
+    .github-cta::before {
+      content: "";
+
+      position: absolute;
+
+      width: 230px;
+      height: 230px;
+
+      right: -110px;
+      top: -150px;
+
+      border:
+        1px solid
+        rgba(146, 210, 84, 0.09);
+
+      border-radius: 50%;
+
+      box-shadow:
+        0 0 0 20px rgba(146, 210, 84, 0.015),
+        0 0 0 45px rgba(146, 210, 84, 0.009);
+
+      pointer-events: none;
+    }
+
+    .github-cta > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .github-cta h3 {
+      margin-bottom: 4px;
+
+      font-family: "Outfit", sans-serif;
+
+      font-size: 1.4rem;
+      font-weight: 800;
+    }
+
+    .github-cta p {
+      color: var(--muted);
+
+      font-size: 0.88rem;
+    }
+
+    .github-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      min-width: 150px;
+
+      padding: 12px 17px;
+
+      border-radius: 10px;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--green-bright),
+          var(--green)
+        );
+
+      color: #07100b;
+
+      font-size: 0.78rem;
+      font-weight: 800;
+
+      text-decoration: none;
+
+      box-shadow:
+        0 10px 30px rgba(146, 210, 84, 0.09);
+
+      transition:
+        transform 220ms ease,
+        box-shadow 220ms ease;
+    }
+
+    .github-button:hover {
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 14px 34px rgba(146, 210, 84, 0.18);
+    }
+
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+
     footer {
-      border-top: 1px solid var(--border-color);
-      padding: 40px 24px;
+      padding: 38px 24px;
+
+      border-top:
+        1px solid
+        rgba(255, 255, 255, 0.055);
+
       text-align: center;
-      font-size: 0.9rem;
-      color: var(--text-muted);
+
+      color: var(--muted);
+
+      font-size: 0.84rem;
+
+      background:
+        rgba(3, 8, 5, 0.7);
     }
 
     footer a {
-      color: var(--text-light);
+      color: var(--green);
+
       font-weight: 600;
+
       text-decoration: none;
     }
 
@@ -314,293 +1243,15 @@
       text-decoration: underline;
     }
 
+
     /* =========================================================
-       Z APPS VISUAL UPGRADE
-       Keeps the existing content/assets, adds a polished
-       dark developer-studio presentation.
+       RESPONSIVE — TABLET
        ========================================================= */
 
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background:
-        radial-gradient(circle at 15% 5%, rgba(35, 197, 94, 0.08), transparent 28rem),
-        radial-gradient(circle at 85% 18%, rgba(59, 130, 246, 0.055), transparent 26rem),
-        var(--bg-dark);
-    }
-
-    /* Subtle grid texture */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: -1;
-      opacity: 0.22;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
-      background-size: 42px 42px;
-      mask-image: linear-gradient(to bottom, black, transparent 85%);
-    }
-
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      min-height: 72px;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      background: rgba(13, 17, 23, 0.82);
-      box-shadow: 0 1px 0 rgba(255,255,255,0.025);
-    }
-
-    .brand-logo-container {
-      transition: transform 0.25s ease;
-    }
-
-    .brand-logo-container:hover {
-      transform: translateY(-1px);
-    }
-
-    .brand-logo-container img {
-      box-shadow:
-        0 5px 14px rgba(0, 0, 0, 0.35),
-        0 0 0 1px rgba(255,255,255,0.04);
-    }
-
-    .brand-text {
-      color: var(--logo-green);
-      text-shadow: 0 0 24px rgba(146, 210, 84, 0.12);
-    }
-
-    .container {
-      padding-top: 92px;
-    }
-
-    .hero {
-      position: relative;
-      margin-bottom: 92px;
-      padding: 42px 0 8px;
-    }
-
-    h1 {
-      max-width: 900px;
-      font-size: clamp(3.5rem, 9vw, 6.7rem);
-      letter-spacing: -0.055em;
-      line-height: 0.98;
-      text-wrap: balance;
-    }
-
-    h1 .highlight {
-      background: linear-gradient(100deg, #f0f6fc 0%, #cdd8e4 55%, #92d254 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero-sub {
-      margin-top: 28px;
-      max-width: 650px;
-      font-size: 1.05rem;
-      line-height: 1.8;
-    }
-
-    .section-title {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      font-size: 2.1rem;
-      letter-spacing: -0.02em;
-    }
-
-    .section-title::after {
-      content: "";
-      height: 1px;
-      flex: 1;
-      background: linear-gradient(
-        90deg,
-        var(--border-color),
-        rgba(48,54,61,0)
-      );
-    }
-
-    .app-grid {
-      gap: 22px;
-      margin-bottom: 110px;
-    }
-
-    .app-card {
-      overflow: hidden;
-      min-height: 390px;
-      padding: 30px;
-      border-color: rgba(48, 54, 61, 0.9);
-      background:
-        linear-gradient(145deg, rgba(255,255,255,0.028), transparent 38%),
-        var(--card-bg);
-      box-shadow:
-        0 16px 35px rgba(0,0,0,0.16),
-        inset 0 1px 0 rgba(255,255,255,0.025);
-    }
-
-    .app-card::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 2px;
-      opacity: 0;
-      transition: opacity 0.25s ease;
-    }
-
-    .card-zplayer::before {
-      background: linear-gradient(90deg, transparent, var(--accent-zplayer), transparent);
-    }
-
-    .card-upcoming-1::before {
-      background: linear-gradient(90deg, transparent, var(--accent-znotes), transparent);
-    }
-
-    .card-upcoming-2::before {
-      background: linear-gradient(90deg, transparent, var(--accent-zfiles), transparent);
-    }
-
-    .app-card:hover {
-      transform: translateY(-8px);
-      box-shadow:
-        0 24px 55px rgba(0,0,0,0.28),
-        8px 8px 0 rgba(0,0,0,0.45);
-    }
-
-    .app-card:hover::before {
-      opacity: 1;
-    }
-
-    .app-badge {
-      padding: 6px 12px;
-      margin-bottom: 26px;
-      background: rgba(255,255,255,0.025);
-      backdrop-filter: blur(8px);
-    }
-
-    .app-icon-img,
-    .app-icon {
-      transition: transform 0.3s ease, filter 0.3s ease;
-    }
-
-    .app-card:hover .app-icon-img {
-      transform: translateY(-3px) scale(1.035);
-      filter: drop-shadow(0 8px 14px rgba(0,0,0,0.25));
-    }
-
-    .app-card:hover .app-icon {
-      transform: translateY(-3px);
-    }
-
-    .app-title {
-      letter-spacing: -0.02em;
-    }
-
-    .app-desc {
-      line-height: 1.75;
-    }
-
-    .app-link {
-      width: fit-content;
-      padding: 9px 0;
-      border-bottom: 1px solid transparent;
-    }
-
-    .app-link:hover {
-      opacity: 1;
-      border-bottom-color: currentColor;
-    }
-
-    .philosophy {
-      position: relative;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 100% 0%, rgba(35,197,94,0.08), transparent 24rem),
-        linear-gradient(145deg, rgba(255,255,255,0.025), transparent 45%),
-        var(--bg-darker);
-      box-shadow:
-        0 20px 50px rgba(0,0,0,0.18),
-        inset 0 1px 0 rgba(255,255,255,0.025);
-    }
-
-    .philosophy::after {
-      content: "";
-      position: absolute;
-      width: 240px;
-      height: 240px;
-      right: -100px;
-      bottom: -130px;
-      border-radius: 50%;
-      border: 1px solid rgba(35,197,94,0.08);
-      box-shadow: 0 0 0 35px rgba(35,197,94,0.025);
-      pointer-events: none;
-    }
-
-    .phil-item {
-      padding: 22px;
-      border: 1px solid rgba(48,54,61,0.65);
-      border-radius: 12px;
-      background: rgba(255,255,255,0.012);
-      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-    }
-
-    .phil-item:hover {
-      transform: translateY(-4px);
-      border-color: rgba(146,210,84,0.25);
-      background: rgba(146,210,84,0.025);
-    }
-
-    footer {
-      background: rgba(1,4,9,0.4);
-    }
-
-    footer a {
-      color: var(--logo-green);
-    }
-
-    /* Selection */
-    ::selection {
-      background: rgba(35, 197, 94, 0.28);
-      color: #fff;
-    }
-
-    /* Mobile polish */
-    @media (max-width: 700px) {
-      nav {
-        padding: 14px 20px;
-      }
-
-      .brand-logo-container img {
-        height: 36px;
-      }
-
-      .brand-text {
-        font-size: 1.2rem;
-      }
+    @media (max-width: 1050px) {
 
       .container {
-        padding: 62px 20px;
-      }
-
-      .hero {
-        padding-top: 24px;
-        margin-bottom: 72px;
-      }
-
-      h1 {
-        font-size: clamp(3rem, 16vw, 4.7rem);
-      }
-
-      .hero-sub {
-        font-size: 1rem;
+        width: min(100% - 56px, 900px);
       }
 
       .app-grid {
@@ -608,61 +1259,44 @@
       }
 
       .app-card {
-        min-height: auto;
-      }
-
-      .philosophy {
-        padding: 28px 22px;
+        min-height: 370px;
       }
 
       .philosophy-grid {
         grid-template-columns: 1fr;
       }
-    }
 
-    /* Respect reduced-motion preferences */
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      *,
-      *::before,
-      *::after {
-        transition: none !important;
-        animation: none !important;
+      h1 {
+        font-size: clamp(3.8rem, 9vw, 6.8rem);
       }
     }
 
-    .eyebrow{display:inline-flex;border:1px solid rgba(35,197,94,.4);border-radius:999px;padding:7px 13px;color:#23C55E;font-size:.7rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:25px}
-    .nav-links{display:flex;gap:28px;align-items:center}
-    .nav-links a{color:#8B949E;text-decoration:none;font-size:.82rem;font-weight:600}
-    .nav-links a:hover{color:#F0F6FC}.nav-links .nav-github{color:#23C55E}
-    .section-title{display:flex;align-items:center;gap:12px}.section-title::before{content:"";width:8px;height:8px;border-radius:50%;background:#23C55E;box-shadow:0 0 14px rgba(35,197,94,.5)}
-    .app-card{min-height:430px;border-radius:15px}
-    .card-zplayer{border-color:rgba(35,197,94,.65);box-shadow:0 0 0 1px rgba(35,197,94,.08)}
-    .card-zplayer:hover{box-shadow:0 18px 45px rgba(0,0,0,.3),0 0 28px rgba(35,197,94,.1),8px 8px 0 rgba(0,0,0,.55)}
-    .app-icon{width:62px;height:62px;border:1px solid var(--border-color);border-radius:14px;display:grid;place-items:center;font-size:1.9rem;margin-bottom:19px;background:#10151B}
-    .philosophy{position:relative;overflow:hidden;padding:42px;margin-bottom:62px;background:linear-gradient(145deg,#010409,#030A08)}
-    .phil-item{padding:24px;border:1px solid #202731;border-radius:13px;background:rgba(0,0,0,.16)}
-    .phil-index{font-family:'Outfit',sans-serif;color:#23C55E;font-size:.7rem;font-weight:800;letter-spacing:1.5px;margin-bottom:15px}
-    .github-cta{display:flex;align-items:center;justify-content:space-between;gap:25px;padding:27px 30px;border:1px solid rgba(35,197,94,.22);border-radius:14px;background:rgba(35,197,94,.025);margin-bottom:62px}
-    .github-cta h3{font-family:'Outfit',sans-serif;font-size:1.35rem;margin-bottom:3px}.github-cta p{color:#8B949E;font-size:.88rem}
-    .github-button{display:inline-flex;align-items:center;padding:11px 16px;border-radius:9px;background:#23C55E;color:#061008;text-decoration:none;font-weight:800;font-size:.82rem;white-space:nowrap}
-    @media(max-width:900px){.container{width:min(100% - 40px,700px)}.app-grid{grid-template-columns:1fr}.philosophy-grid{grid-template-columns:1fr}.nav-links{display:flex;gap:14px}.nav-links a{font-size:.72rem}}
-    @media(max-width:600px){.container{width:auto;padding:58px 20px}.app-card{min-height:370px}.github-cta{align-items:flex-start;flex-direction:column}.github-button{width:100%;text-align:center}}
 
-    @media (max-width: 600px) {
+    /* =========================================================
+       RESPONSIVE — MOBILE
+       ========================================================= */
+
+    @media (max-width: 700px) {
+
       nav {
-        padding: 0 16px;
+        height: 68px;
+
+        padding: 0 18px;
+
+        gap: 14px;
       }
 
       .brand-logo-container {
         gap: 7px;
+
+        flex-shrink: 0;
       }
 
       .brand-logo-container img {
+        width: 34px;
         height: 34px;
+
+        border-radius: 9px;
       }
 
       .brand-text {
@@ -670,408 +1304,613 @@
       }
 
       .nav-links {
-        gap: 10px;
+        gap: 13px;
       }
 
       .nav-links a {
-        font-size: 0.64rem;
-        letter-spacing: 0;
+        font-size: 0.65rem;
+      }
+
+      .container {
+        width: auto;
+
+        padding:
+          58px
+          20px
+          62px;
+      }
+
+      .hero {
+        padding-top: 18px;
+
+        margin-bottom: 76px;
+      }
+
+      .eyebrow {
+        margin-bottom: 23px;
+
+        font-size: 0.61rem;
+      }
+
+      h1 {
+        font-size:
+          clamp(
+            3.35rem,
+            15.5vw,
+            5rem
+          );
+
+        letter-spacing: -0.055em;
+
+        line-height: 0.96;
+      }
+
+      .hero-sub {
+        margin-top: 25px;
+
+        font-size: 0.95rem;
+
+        line-height: 1.75;
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+
+        margin-bottom: 27px;
+      }
+
+      .app-grid {
+        gap: 16px;
+
+        margin-bottom: 78px;
+      }
+
+      .app-card {
+        min-height: auto;
+
+        padding: 25px;
+
+        border-radius: 18px;
+      }
+
+      .app-status-row {
+        margin-bottom: 23px;
+      }
+
+      .app-icon-img,
+      .app-icon {
+        width: 58px;
+        height: 58px;
+
+        margin-bottom: 18px;
+      }
+
+      .app-title {
+        font-size: 1.65rem;
+      }
+
+      .app-desc {
+        font-size: 0.91rem;
+      }
+
+      .philosophy {
+        padding: 28px 20px;
+
+        border-radius: 18px;
+      }
+
+      .philosophy-header {
+        font-size: 1.6rem;
+      }
+
+      .phil-item {
+        padding: 20px;
+      }
+
+      .github-cta {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        padding: 25px;
+      }
+
+      .github-button {
+        width: 100%;
       }
     }
 
 
-/* =========================================
-   FINAL POLISH PASS
-   ========================================= */
+    /* =========================================================
+       RESPONSIVE — VERY SMALL PHONES
+       ========================================================= */
 
-/* Consistent motion without making the site feel animated */
-@media (prefers-reduced-motion: no-preference) {
-  .app-card,
-  .github-button,
-  .app-link span,
-  .nav-links a {
-    transition:
-      transform 220ms ease,
-      color 220ms ease,
-      border-color 220ms ease,
-      box-shadow 220ms ease,
-      background-color 220ms ease;
-  }
-}
+    @media (max-width: 430px) {
 
-/* Featured Z Player: clearer hierarchy without changing card dimensions */
-.card-zplayer {
-  position: relative;
-}
+      nav {
+        padding: 0 12px;
+      }
 
-/* Changed from ::before to ::after to prevent conflicts with the hover line */
-.card-zplayer::after {
-  content: "FEATURED";
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  padding: 5px 8px;
-  border: 1px solid rgba(35, 197, 94, 0.24);
-  border-radius: 6px;
-  color: rgba(35, 197, 94, 0.72);
-  background: rgba(35, 197, 94, 0.045);
-  font-size: 0.58rem;
-  font-weight: 800;
-  letter-spacing: 1.2px;
-  pointer-events: none;
-}
+      .brand-logo-container img {
+        width: 30px;
+        height: 30px;
+      }
 
-/* Keep badge and featured marker from visually competing */
-.card-zplayer .app-badge {
-  padding-right: 96px;
-}
+      .brand-text {
+        font-size: 1.02rem;
+      }
 
-/* Cleaner, more coherent placeholder icons */
-.card-upcoming-1 .app-icon,
-.card-upcoming-2 .app-icon {
-  font-family: Inter, sans-serif;
-  font-size: 1.55rem;
-  font-weight: 500;
-  color: currentColor;
-}
+      .nav-links {
+        gap: 8px;
+      }
 
-.card-upcoming-1 .app-icon {
-  color: rgba(249, 115, 22, 0.9);
-}
+      .nav-links a {
+        font-size: 0.57rem;
+      }
 
-.card-upcoming-2 .app-icon {
-  color: rgba(59, 130, 246, 0.9);
-}
+      .container {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
 
-/* Slightly more tactile card hover */
-@media (hover: hover) and (pointer: fine) {
-  .app-card:hover {
-    transform: translateY(-5px);
-  }
+      h1 {
+        font-size: clamp(3rem, 15vw, 4.3rem);
+      }
 
-  .card-zplayer:hover {
-    box-shadow:
-      0 18px 42px rgba(0, 0, 0, 0.30),
-      0 0 30px rgba(35, 197, 94, 0.095),
-      7px 7px 0 rgba(0, 0, 0, 0.52);
-  }
-}
+      .app-status-row {
+        gap: 7px;
+      }
 
-/* Better CTA integration */
-.github-cta {
-  position: relative;
-  overflow: hidden;
-}
+      .app-badge,
+      .featured-badge {
+        font-size: 0.54rem;
+        letter-spacing: 0.8px;
+      }
+    }
 
-.github-cta::after {
-  content: "";
-  position: absolute;
-  width: 180px;
-  height: 180px;
-  right: -90px;
-  top: -120px;
-  border-radius: 50%;
-  border: 1px solid rgba(35, 197, 94, 0.10);
-  box-shadow:
-    0 0 0 18px rgba(35, 197, 94, 0.018),
-    0 0 0 40px rgba(35, 197, 94, 0.010);
-  pointer-events: none;
-}
 
-.github-cta > * {
-  position: relative;
-  z-index: 1;
-}
+    /* =========================================================
+       REDUCED MOTION
+       ========================================================= */
 
-.github-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 22px rgba(35, 197, 94, 0.18);
-}
+    @media (prefers-reduced-motion: reduce) {
 
-/* Footer year */
-footer .footer-year {
-  color: #8B949E;
-}
+      html {
+        scroll-behavior: auto;
+      }
 
-/* Large desktop: use available width without creating a stretched UI */
-@media (min-width: 1400px) {
-  .container {
-    width: min(1440px, calc(100% - 112px));
-  }
-}
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
 
-/* Tablet/mobile navigation: keep the links visible and readable */
-@media (max-width: 900px) {
-  nav {
-    gap: 16px;
-  }
-
-  .nav-links {
-    display: flex !important;
-    gap: 15px;
-    flex-shrink: 0;
-  }
-
-  .nav-links a {
-    font-size: 0.70rem;
-    white-space: nowrap;
-  }
-}
-
-/* Small phones: compact but still readable */
-@media (max-width: 600px) {
-  nav {
-    height: 68px;
-    padding: 0 14px;
-    gap: 10px;
-  }
-
-  .brand-logo-container {
-    gap: 6px;
-    min-width: 0;
-  }
-
-  .brand-logo-container img {
-    height: 32px;
-  }
-
-  .brand-text {
-    font-size: 1.12rem;
-    letter-spacing: 0.2px;
-  }
-
-  .nav-links {
-    gap: 8px;
-  }
-
-  .nav-links a {
-    font-size: 0.60rem;
-  }
-
-  .hero {
-    padding-top: 22px;
-    margin-bottom: 58px;
-  }
-
-  h1 {
-    letter-spacing: -0.045em;
-  }
-
-  .hero-sub {
-    max-width: 100%;
-  }
-
-  .card-zplayer .app-badge {
-    padding-right: 88px;
-  }
-
-  .card-zplayer::after {
-    top: 17px;
-    right: 16px;
-    font-size: 0.52rem;
-  }
-}
-
-/* Very narrow phones: avoid navbar collisions */
-@media (max-width: 390px) {
-  nav {
-    padding: 0 10px;
-  }
-
-  .brand-text {
-    font-size: 1.02rem;
-  }
-
-  .brand-logo-container img {
-    height: 30px;
-  }
-
-  .nav-links {
-    gap: 6px;
-  }
-
-  .nav-links a {
-    font-size: 0.56rem;
-  }
-}
-
-</style>
+  </style>
 </head>
+
 
 <body>
 
-  <!-- Header Nav -->
+  <!-- =======================================================
+       NAVIGATION
+       ======================================================= -->
+
   <nav>
+
     <a href="#" class="brand-logo-container">
-      <img src="assets/ZAPPS.png" alt="Z Apps Logo">
-      <span class="brand-text">APPS</span>
+
+      <img
+        src="assets/ZAPPS.png"
+        alt="Z Apps Logo"
+      >
+
+      <span class="brand-text">
+        APPS
+      </span>
+
     </a>
+
+
     <div class="nav-links">
-      <a href="#portfolio">Apps</a>
-      <a href="#philosophy">Philosophy</a>
-      <a class="nav-github" href="https://github.com/silenTKnight-sudo506" target="_blank" rel="noopener">GitHub ↗</a>
+
+      <a href="#portfolio">
+        Apps
+      </a>
+
+      <a href="#philosophy">
+        Philosophy
+      </a>
+
+      <a
+        class="nav-github"
+        href="https://github.com/silenTKnight-sudo506"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        GitHub ↗
+      </a>
+
     </div>
+
   </nav>
 
-  <!-- Main Content -->
-  <div class="container">
 
-    <!-- Hero -->
+
+  <!-- =======================================================
+       MAIN
+       ======================================================= -->
+
+  <main class="container">
+
+
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+
     <header class="hero">
-      <div class="eyebrow">Z APPS / ANDROID UTILITIES</div>
+
+      <div class="eyebrow">
+        Z APPS / ANDROID UTILITIES
+      </div>
+
+
       <h1>
-        Software for the <br>
-        <span class="highlight">Minimal & Uncluttered.</span>
+
+        Software for the
+        <br>
+
+        <span class="highlight">
+          minimal &amp; uncluttered.
+        </span>
+
       </h1>
 
+
       <p class="hero-sub">
+
         An independent development studio focused on building
-        high-performance, resource-light native utilities for Android.
+        <strong>high-performance, resource-light native utilities</strong>
+        for Android — designed to stay fast, focused, and out of your way.
+
       </p>
+
     </header>
 
-    <!-- App Portfolio Grid -->
+
+
+    <!-- =====================================================
+         PORTFOLIO
+         ===================================================== -->
+
     <section id="portfolio">
-    <h2 class="section-title">The Portfolio</h2>
 
-    <div class="app-grid">
+      <h2 class="section-title">
+        The Portfolio
+      </h2>
 
-      <!-- App 1: Z Player -->
-      <div class="app-card card-zplayer">
 
-        <div class="app-badge">Released</div>
+      <div class="app-grid">
 
-        <img
-          src="assets/ZPlayer.png"
-          alt="Z Player Logo"
-          class="app-icon-img"
-        >
 
-        <div class="app-title">Z Player</div>
+        <!-- =================================================
+             Z PLAYER
+             ================================================= -->
 
-        <p class="app-desc">
-          An Android-first media player built for smooth local playback
-          without unnecessary background overhead. High performance meets
-          aesthetic card previews.
-        </p>
+        <article class="app-card card-zplayer">
 
-        <a
-          href="https://github.com/silenTKnight-sudo506/ZPlayer/tree/main"
-          target="_blank"
-          class="app-link"
-        >
-          View Source <span>&rarr;</span>
-        </a>
+
+          <div class="app-status-row">
+
+            <div class="app-badge">
+              Released
+            </div>
+
+            <div class="featured-badge">
+              Featured
+            </div>
+
+          </div>
+
+
+          <img
+            src="assets/ZPlayer.png"
+            alt="Z Player Logo"
+            class="app-icon-img"
+          >
+
+
+          <h3 class="app-title">
+            Z Player
+          </h3>
+
+
+          <p class="app-desc">
+
+            A performance-focused Android media player built around
+            smooth local playback, fast media navigation, and a clean
+            interface. Z Player keeps playback responsive while avoiding
+            unnecessary background overhead.
+
+          </p>
+
+
+          <a
+            href="https://github.com/silenTKnight-sudo506/ZPlayer/tree/main"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="app-link"
+          >
+            View Source
+            <span>&rarr;</span>
+          </a>
+
+
+        </article>
+
+
+
+        <!-- =================================================
+             Z NOTES
+             ================================================= -->
+
+        <article class="app-card card-upcoming-1">
+
+
+          <div class="app-status-row">
+
+            <div class="app-badge">
+              In Development
+            </div>
+
+          </div>
+
+
+          <img
+            src="assets/ZNote.png"
+            alt="Z Notes Logo"
+            class="app-icon-img"
+          >
+
+
+          <h3 class="app-title">
+            Z Notes
+          </h3>
+
+
+          <p class="app-desc">
+
+            A focused note-taking experience designed around speed,
+            simplicity, and local-first storage. Z Notes aims to make
+            capturing ideas effortless without filling the interface
+            with unnecessary features or distractions.
+
+          </p>
+
+
+          <a
+            href="#"
+            class="app-link"
+          >
+            Coming Soon
+            <span>&rarr;</span>
+          </a>
+
+
+        </article>
+
+
+
+        <!-- =================================================
+             PROJECT 03
+             ================================================= -->
+
+        <article class="app-card card-upcoming-2">
+
+
+          <div class="app-status-row">
+
+            <div class="app-badge">
+              Concept
+            </div>
+
+          </div>
+
+
+          <div class="app-icon">
+            📁
+          </div>
+
+
+          <h3 class="app-title">
+            Project 03
+          </h3>
+
+
+          <p class="app-desc">
+
+            Exploring advanced local file management through the same
+            card-driven design philosophy established across Z Apps.
+            The goal is a fast, intuitive experience for navigating and
+            organizing files directly on your device.
+
+          </p>
+
+
+          <a
+            href="#"
+            class="app-link"
+          >
+            Coming Soon
+            <span>&rarr;</span>
+          </a>
+
+
+        </article>
+
 
       </div>
 
-      <!-- App 2: Placeholder -->
-      <div class="app-card card-upcoming-1">
+    </section>
 
-        <div class="app-badge">In Development</div>
 
-         <img
-          src="assets/ZNote.png"
-          alt="Z Notes Logo"
-          class="app-icon-img"
-        >
 
-        <div class="app-title">Z Notes</div>
+    <!-- =====================================================
+         DEVELOPMENT PHILOSOPHY
+         ===================================================== -->
 
-        <p class="app-desc">
-          Currently in the testing phase. Focused on streamlining daily
-          productivity with zero bloat and absolute local privacy.
-        </p>
-
-        <a href="#" class="app-link">
-          Coming Soon <span>&rarr;</span>
-        </a>
-
-      </div>
-
-      <!-- App 3: Placeholder -->
-      <div class="app-card card-upcoming-2">
-
-        <div class="app-badge">Concept</div>
-
-        <div class="app-icon">📁</div>
-
-        <div class="app-title">Project 03</div>
-
-        <p class="app-desc">
-          Exploring advanced local file management utilizing the same
-          card-driven interface philosophy established in Z Player.
-        </p>
-
-        <a href="#" class="app-link">
-          Coming Soon <span>&rarr;</span>
-        </a>
-
-      </div>
-
-    </div>
-  </section>
-
-    <!-- Core Philosophy -->
-    <div class="philosophy" id="philosophy">
+    <section
+      class="philosophy"
+      id="philosophy"
+    >
 
       <div class="philosophy-header">
         Development Philosophy
       </div>
 
+
       <div class="philosophy-grid">
 
-        <div class="phil-item">
-          <div class="phil-index">01 / PRINCIPLE</div><h3>Zero Bloat</h3>
-          <p>
-            Every line of code serves a purpose. No unnecessary background
-            tasks, no telemetry, and absolute respect for device battery life.
-          </p>
-        </div>
 
-        <div class="phil-item">
-          <div class="phil-index">02 / PRINCIPLE</div><h3>Card-Driven UI</h3>
-          <p>
-            Moving away from text-heavy spreadsheets. Interfaces should be
-            visual, intuitive, and built for modern tactile navigation.
-          </p>
-        </div>
+        <!-- ZERO BLOAT -->
 
-        <div class="phil-item">
-          <div class="phil-index">03 / PRINCIPLE</div><h3>Local First</h3>
+        <article class="phil-item">
+
+          <div class="phil-index">
+            01 / PRINCIPLE
+          </div>
+
+          <h3>
+            Zero Bloat
+          </h3>
+
           <p>
-            Your data belongs on your device. Z Apps are designed to work
-            flawlessly offline, prioritizing local storage indexing over
-            cloud dependency.
+
+            Every line of code should have a reason to exist.
+            No unnecessary background tasks, no excessive dependencies,
+            and no features added simply for the sake of adding them.
+
           </p>
-        </div>
+
+        </article>
+
+
+
+        <!-- CARD DRIVEN UI -->
+
+        <article class="phil-item">
+
+          <div class="phil-index">
+            02 / PRINCIPLE
+          </div>
+
+          <h3>
+            Card-Driven UI
+          </h3>
+
+          <p>
+
+            Interfaces should feel visual, intuitive, and natural to
+            navigate. Z Apps use structured cards and clear hierarchy
+            instead of overwhelming users with dense interfaces.
+
+          </p>
+
+        </article>
+
+
+
+        <!-- LOCAL FIRST -->
+
+        <article class="phil-item">
+
+          <div class="phil-index">
+            03 / PRINCIPLE
+          </div>
+
+          <h3>
+            Local First
+          </h3>
+
+          <p>
+
+            Your data belongs on your device. Z Apps prioritize local
+            storage, offline functionality, and direct device interaction
+            instead of unnecessary dependence on cloud services.
+
+          </p>
+
+        </article>
+
 
       </div>
-    </div>
 
-  </div>
+    </section>
 
-  <section class="github-cta">
-    <div>
-      <h3>Built in public.</h3>
-      <p>Explore the source, follow development, and see what's coming next.</p>
-    </div>
-    <a class="github-button" href="https://github.com/silenTKnight-sudo506" target="_blank" rel="noopener">Explore GitHub ↗</a>
-  </section>
 
-  </div>
 
-  <!-- Footer -->
+    <!-- =====================================================
+         GITHUB CTA
+         ===================================================== -->
+
+    <section class="github-cta">
+
+
+      <div>
+
+        <h3>
+          Built in public.
+        </h3>
+
+        <p>
+          Explore the source, follow development, and see what's coming next.
+        </p>
+
+      </div>
+
+
+      <a
+        class="github-button"
+        href="https://github.com/silenTKnight-sudo506"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Explore GitHub ↗
+      </a>
+
+
+    </section>
+
+
+  </main>
+
+
+
+  <!-- =======================================================
+       FOOTER
+       ======================================================= -->
+
   <footer>
+
     <p>
+
       Crafted by
+
       <a
         href="https://github.com/silenTKnight-sudo506"
         target="_blank"
-      >silenTKnight</a>
+        rel="noopener noreferrer"
+      >
+        silenTKnight
+      </a>
+
       · Open Source MIT License
+
     </p>
+
   </footer>
+
 
 </body>
 </html>
